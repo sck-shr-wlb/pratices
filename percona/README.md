@@ -1,10 +1,11 @@
 # Data Masking With Percona
 
-1. Run docker (start container)
-    - docker run -d --name ps -e MYSQL_ROOT_PASSWORD=root percona/percona-server:8.0
-    - docker ps
-    - docker exec -it ps /bin/bash
-
+1. Start container
+    - ### Run docker
+        - docker run -d --name ps -e MYSQL_ROOT_PASSWORD=root percona/percona-server:8.0
+        - docker ps
+        - docker exec -it ps /bin/bash
+---
 2. Experiment : Basic usage/SSN numbers/Credit card numbers และการใช้ View
     - ### Installation
         - INSTALL PLUGIN data_masking SONAME 'data_masking.so';
@@ -33,9 +34,9 @@
         - alter table employee add column cc char(16);
         - update employee set cc = "1234123412341234";
         - select mask_pan(cc) from employee;
-
+---
 3. ลองใช้ Robot framework เช่น insert, select
-
-### Link reference
+---
+## Link reference
 1. https://docs.percona.com/percona-server/8.0/installation/docker.html
-2. https://www.percona.com/blog/data-masking-with-percona-server-for-mysql-an-enterprise-feature-at-a-community-price/?utm_campaign=pzcampaign&utm_source=twitter&utm_medium=paidsocial&utm_content=blog
+2. https://www.percona.com/blog/data-masking-with-percona-server-for-mysql-an-enterprise-feature-at-a-community-price/
