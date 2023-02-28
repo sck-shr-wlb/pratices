@@ -46,6 +46,32 @@
     update employee set cc = "1234123412341234";
     select mask_pan(cc) from employee;
     ```
+    ### Using a view with a mask
+    ใช้ View table เพื่อกำหนดสิทธิ์ของผู้ใช้งานในการเข้าถึงข้อมูลต่างๆ
+    1. สร้าง User ที่ใช้สำหรับเข้าใช้งาน View table 
+    ```
+    create user 'nopriv'@'%' identified by 'test';
+    ```
+    2. สร้าง View table
+    ```
+    create view e1_cc as 
+    select id, 
+        name, 
+        mask_pan(cc) 
+    from employee;
+    ```
+    3. กำหนดสิทธิ์การเข้าใช้งาน View table ให้กับ User
+    ```
+    grant select on e1_cc to 'nopriv'@'%';
+    ```
+    4. เข้าใช้งาน mysql ด้วย user ที่สร้าง
+    ```
+    mysql -u nopriv -p
+    ```
+    5. เรียกแสดง View table
+    ```
+    select * from e1_cc;
+    ```
 ---
 3. ลองใช้ Robot framework เช่น insert, select
 ---
